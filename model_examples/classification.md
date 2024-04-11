@@ -29,33 +29,54 @@ import pandas as pd
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
 
-# Example dataset
-data_df = pd.DataFrame({
-    'Number of Website Visits': [10, 2, 5, 8, 15, 4, 9, 1, 3, 7],
-    'Number of Virtual Tours': [2, 1, 0, 3, 4, 2, 3, 0, 1, 2],
-    'Length of Browsing Session': [30, 5, 10, 20, 45, 12, 25, 3, 8, 18], # in minutes
-    'Rental Conversion': [1, 0, 0, 1, 1, 0, 1, 0, 0, 1]
-})
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
 
-# Defining the predictor variables and the target variable
-X = data_df[['Number of Website Visits', 'Number of Virtual Tours', 'Length of Browsing Session']]
-y = data_df['Rental Conversion']
+# Create synthetic data
+np.random.seed(42)
+data_size = 100  # Increased dataset size
 
-# Adding a constant for the intercept
+# Generate random data
+data = {
+    'Number of Website Visits': np.random.poisson(5, data_size),
+    'Number of Virtual Tours': np.random.poisson(2, data_size),
+    'Length of Browsing Session': np.random.normal(20, 5, data_size),  # Average 20 minutes, std dev 5
+    'Rental Conversion': np.random.binomial(1, 0.5, data_size)  # Random binary outcome
+}
+
+df = pd.DataFrame(data)
+
+# Given this is simulated data for example purposes, we need to introduce more structure to make sure 'Number of Virtual Tours' significant
+# Increasing the probability of conversion based on the number of virtual tours
+df['Rental Conversion'] = df.apply(
+    lambda row: np.random.binomial(1, min(1, 0.1 + 0.15 * row['Number of Virtual Tours'])), axis=1
+)
+
+# Define predictors and outcome
+X = df[['Number of Website Visits', 'Number of Virtual Tours', 'Length of Browsing Session']]
+y = df['Rental Conversion']
+
+# Add a constant for the logistic regression intercept
 X = sm.add_constant(X)
 
-# Fitting the logistic regression model
+# Fit the logistic regression model
 model = sm.Logit(y, X).fit()
 
-# Printing the model summary
+# Print the summary of the logistic regression model
 print(model.summary())
 
 # Predicting probabilities
 predictions = model.predict(X)
-data_df['Predicted Probability'] = predictions
+df['Predicted Probability'] = predictions
 
-# Display the first few rows of the dataframe to see actual vs predicted probabilities
-print(data_df.head())
+# Plotting the relationship between Number of Virtual Tours and Predicted Probability
+plt.scatter(df['Number of Virtual Tours'], df['Predicted Probability'])
+plt.xlabel('Number of Virtual Tours')
+plt.ylabel('Predicted Probability of Conversion')
+plt.title('Effect of Virtual Tours on Rental Conversion Probability')
+plt.show()
 ```
 
 ### Logistic Regression Model Interpretation
