@@ -26,10 +26,8 @@ Each markdown file includes:
 To explore these examples, you can view the markdown files directly on GitHub or clone this repository to your local machine using the following command:
 
 ```bash
-git clone https://github.com/yourusername/dsProject_entrata_hack_2024.git
+git clone https://github.com/carterrees-entrata/dsProject_entrata_hack_2024.git
 ```
-
-Replace `yourusername` with your actual GitHub username.
 
 ## Model Interpretations
 
