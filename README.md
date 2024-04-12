@@ -2,7 +2,7 @@
 
 # Model Examples for Regression Analysis
 
-This repository contains markdown files with examples and interpretations of basic regression models and their XGBoost counterparts. The primary objective is to provide an accessible introduction to these models, emphasizing their interpretability and offering basic code examples to demonstrate their use.
+This repository contains markdown files with examples and interpretations of basic regression models and their XGBoost counterparts. The primary objective is to provide an accessible introduction to these models, emphasizing their interpretability and offering basic code examples to demonstrate their use. Please run the code in your IDE and you will see all the outputs for interpretation.
 
 ## Purpose
 
