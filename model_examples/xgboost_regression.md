@@ -30,7 +30,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
-# Create a DataFrame
+# Create a DataFrame, this is just for example purposes. You will want at least 100 cases for your project. 
 data_df = pd.DataFrame({
     'Rental Agreement Length (months)': [12, 24, 12, 36, 12, 24, 12, 24, 36, 12],
     'Number of Times Lease Renewed': [0, 1, 0, 2, 1, 2, 0, 3, 1, 2],
